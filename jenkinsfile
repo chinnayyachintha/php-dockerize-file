@@ -1,0 +1,24 @@
+
+
+pipeline{
+    agent any
+    stages{
+        
+        stage('scm'){
+            steps{
+                git 'https://github.com/chinnayyachintha/php-sample-page.git'
+            }
+        }
+        stage('Docker-Image'){
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'php-d'){
+                        sh 'docker build -t chinnayya339/php:v2.0.0 .'
+                        sh 'docker push chinnayya339/php:v2.0.0'
+                        sh 'docker run --name php1-123 -d -p 8085:80 chinnayya339/php:v2.0.0'
+                    }
+                }
+            }
+        }
+    }
+}
