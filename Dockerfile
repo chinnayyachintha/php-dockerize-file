@@ -8,7 +8,7 @@ RUN docker-php-ext-install mysqli
 WORKDIR /var/www/html
 
 # Copy the PHP script and database configuration file
-COPY index.php /var/www/html/
+COPY html/index.php /var/www/html/
 COPY inc/dbinfo.inc /var/www/inc/
 
 # Set permissions (adjust as needed)sudo chown -R ec2-user:apache /var/www
